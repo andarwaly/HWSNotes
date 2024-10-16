@@ -7,15 +7,31 @@
 
 import SwiftUI
 
+// MARK: - Home View (Content View)
 struct ContentView: View {
+    @StateObject private var viewModel = HomeViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                // Search Bar Component
+                SearchBarView(text: $viewModel.searchText)
+                    .padding()
+
+                // List or grid of items with navigation
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 8) {
+                        ForEach(viewModel.filteredItems) { item in
+                            NavigationLink(destination: DetailViewFactory.createView(for: item.destinationViewName)) {
+                                CardView(item: item)
+                            }
+                        }
+                    }
+                    .padding()
+                }
+            }
+            .navigationTitle("Learning Notes")
         }
-        .padding()
     }
 }
 
