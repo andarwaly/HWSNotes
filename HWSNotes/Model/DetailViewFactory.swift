@@ -12,7 +12,11 @@ class DetailViewFactory {
     // Dictionary to map view names to the corresponding view types
     @MainActor
     private static let viewMappings: [String: any DetailView.Type] = [
-        ResizingImageViews.viewName: ResizingImageViews.self
+        ResizingImageViews.viewName: ResizingImageViews.self,
+        ScrollViewEg.viewName: ScrollViewEg.self,
+        NavLinkView.viewName: NavLinkView.self,
+        HierarchyCodableView.viewName: HierarchyCodableView.self,
+        GridViewEg.viewName: GridViewEg.self
     ]
 
     // Method to create a view dynamically based on the view name

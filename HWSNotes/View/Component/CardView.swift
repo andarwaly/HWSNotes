@@ -12,22 +12,28 @@ struct CardView: View {
     let item: LearningItem
 
     var body: some View {
-        VStack (alignment: .leading) {
+        // Card container
+        VStack (alignment: .leading, spacing: 0) {
+            // Image container
             VStack {
                 Image(systemName: item.imageName)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity, maxHeight: 40)
-                    .padding()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
             }
-            .padding(24)
+            .padding(44)
+            .frame(maxWidth: .infinity)
             .background(Color(red: 0.97, green: 0.97, blue: 0.97))
             
-            Text(item.title)
-                .font(.headline)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, 8)
-                .padding(.bottom, 8)
+            // Text container
+            VStack (alignment: .leading) {
+                Text(item.title)
+                    .font(.headline)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+            }
+            .padding(10)
+            .frame(maxHeight: .infinity, alignment: .topLeading)
         }
         .frame(maxWidth: .infinity)
         .background(Color.white)
@@ -35,4 +41,8 @@ struct CardView: View {
         .shadow(color:Color.black.opacity(0.3) ,radius: 2)
         .padding()
     }
+}
+
+#Preview {
+    CardView(item: .init(title: "Hello", imageName: "person.fill", destinationViewName: "Unknown"))
 }

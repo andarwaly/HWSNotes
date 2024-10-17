@@ -20,14 +20,14 @@ struct ContentView: View {
 
                 // List or grid of items with navigation
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 8) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 154))], spacing: 8) {
                         ForEach(viewModel.filteredItems) { item in
                             NavigationLink(destination: DetailViewFactory.createView(for: item.destinationViewName)) {
                                 CardView(item: item)
                             }
                         }
                     }
-                    .padding()
+//                    .padding()
                 }
             }
             .navigationTitle("Learning Notes")
