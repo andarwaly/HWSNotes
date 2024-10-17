@@ -21,13 +21,19 @@ struct GridViewEg: DetailView {
     
     // Layout untuk adaptive
     let adaptiveLayout = [
-        GridItem(.adaptive(minimum: 100, maximum: 120))
+        GridItem(.adaptive(minimum: 100, maximum: 180)) // adjust spacing horizontal disini (Vgrid)
+    ]
+    
+    // Layout untuk flexible similar dengan fix, tapi konten bakal fill
+    let flexLayout = [
+        GridItem(.flexible(minimum: 100, maximum: 180)),
+        GridItem(.flexible(minimum: 100, maximum: 120))
     ]
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: fixLayout, spacing: 10) {
+                LazyVGrid(columns: fixLayout, spacing: 10) { // Adjust spacing vertically disini
                     ForEach(0..<100) { index in
                         Text("\(index)")
                     }
@@ -39,6 +45,16 @@ struct GridViewEg: DetailView {
                 Divider()
                 
                 LazyVGrid(columns: adaptiveLayout, spacing: 10) {
+                    ForEach(0..<100) { index in
+                        Text("\(index)")
+                    }
+                    .frame(maxWidth:.infinity)
+                    .border(Color.red)
+                }
+                
+                Divider()
+                
+                LazyVGrid(columns: flexLayout, spacing: 10) {
                     ForEach(0..<100) { index in
                         Text("\(index)")
                     }
